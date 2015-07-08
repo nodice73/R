@@ -10,7 +10,12 @@ default.plot <- function(w=15,h=10, device="x11",name="") {
             dev(file=plot.name, width=w,height=h, units="in", res=120)
         } else if (device=="svg") {
             dev(file=plot.name, width=w,height=h)
+        } else if (device=="jpeg") {
+            dev(file=plot.name, width=w,height=h, units="in", res=120)
+        } else {
+            stop("Don't recognize device '", device, "'.")
         }
+
         par(mar=c(5,5.3,1.5,1), 
             family="NimbusSan",
             mex=0.8,
@@ -36,6 +41,10 @@ default.plot <- function(w=15,h=10, device="x11",name="") {
             dev <- "png"
         } else if (grepl("svg", device)) {
             dev <- "svg"
+        } else if (device=="jpeg") {
+            dev(file=plot.name, width=w,height=h)
+        } else {
+            stop("Don't recognize device '", device, "'.")
         }
 
         plot.name <- paste(name,".",dev,sep="")
